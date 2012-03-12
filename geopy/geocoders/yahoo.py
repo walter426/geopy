@@ -4,8 +4,8 @@ Wrapper to the Yahoo's new PlaceFinder API. (doc says that the API RELEASE 1.0 (
 import xml.dom.minidom
 from geopy import util
 from geopy import Point
-from urllib import urlencode
-from urllib2 import urlopen
+from urllib.parse import urlencode
+from urllib.request import urlopen
 from geopy.geocoders.base import Geocoder
 try:
     import json
@@ -43,7 +43,7 @@ class Yahoo(Geocoder):
         return self.parse_json(page, exactly_one)
     
     def parse_json(self, page, exactly_one=True):
-        if not isinstance(page, basestring):
+        if not isinstance(page, str):
             page = util.decode_page(page)
         doc = json.loads(page)
         results = doc.get('ResultSet', []).get('Results', [])
